@@ -14,10 +14,10 @@ import ru.kelcuprum.alinperspective.AlinPerspective;
 public class LivingEntityRendererMixin {
     @Inject(
             at = @At("HEAD"),
-            method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;)Z",
+            method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;D)Z",
             cancellable = true
     )
-    private void viewOwnLabel(LivingEntity ent, CallbackInfoReturnable<Boolean> ci) {
+    private void viewOwnLabel(LivingEntity ent, double d, CallbackInfoReturnable<Boolean> ci) {
         if (ent == AlinLib.MINECRAFT.cameraEntity && AlinPerspective.config.getBoolean("WHO_AM_I", false)) ci.setReturnValue(Minecraft.renderNames());
     }
 }

@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinperspective.AlinPerspective;
 
 @Mixin(Camera.class)
@@ -27,7 +28,7 @@ public class CameraMixin {
         }
     }
 
-    @ModifyArgs(method = "setup", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setRotation(FF)V", ordinal = 0))
+    @ModifyArgs(method = "setup", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setRotation(FF)V", ordinal = 1))
     public void setup$setRotation(Args args){
         if(AlinPerspective.config.getBoolean("ENABLE", false)){
             args.set(0, AlinPerspective.cameraPitch);

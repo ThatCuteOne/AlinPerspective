@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinperspective.AlinPerspective;
 
+import java.nio.file.Watchable;
+
 
 @Mixin(MouseHandler.class)
 public class MouseMixin {
@@ -20,6 +22,7 @@ public class MouseMixin {
             double xi = (x * (AlinLib.MINECRAFT.options.invertYMouse().get() ? -1 : 1));
             AlinPerspective.cameraPitch += AlinPerspective.isPlayerRotation() ? (float) (x * 0.15f) : (float) (xi / 8.0F);
             if(Math.abs(AlinPerspective.cameraYaw) > 90.0F) AlinPerspective.cameraYaw = AlinPerspective.cameraYaw > 0 ? 90.0F : -90.0F;
+
         }
     }
     @Inject(method = "turnPlayer", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"), cancellable = true)
