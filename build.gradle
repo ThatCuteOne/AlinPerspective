@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -21,6 +21,10 @@ repositories {
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
     maven { url = 'https://api.modrinth.com/maven'}
     maven { url = "https://jitpack.io/" }
+    maven {
+        name "kelcuprum_RC"
+        url "https://repo.kelcuprum.ru/RC"
+    }
 }
 
 dependencies {
@@ -32,7 +36,7 @@ dependencies {
 
 
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation("ru.kelcuprum.alinlib:AlinLib-fabric:${project.alinlib}")
+    modImplementation("ru.kelcuprum:AlinLib-fabric:${project.alinlib}")
 }
 
 processResources {

@@ -19,7 +19,7 @@ public class MouseMixin {
     public void Tutorial$onMouse(double d, CallbackInfo ci, double x, double y){
         if(AlinPerspective.config.getBoolean("ENABLE",false)){
             AlinPerspective.cameraYaw += AlinPerspective.isPlayerRotation() ? (float) (y * 0.15f) : (float) (y/8.0f);
-            double xi = (x * (AlinLib.MINECRAFT.options.invertYMouse().get() ? -1 : 1));
+            double xi = (x * (AlinLib.MINECRAFT.options.invertMouseY().get() ? -1 : 1));
             AlinPerspective.cameraPitch += AlinPerspective.isPlayerRotation() ? (float) (x * 0.15f) : (float) (xi / 8.0F);
             if(Math.abs(AlinPerspective.cameraYaw) > 90.0F) AlinPerspective.cameraYaw = AlinPerspective.cameraYaw > 0 ? 90.0F : -90.0F;
 
