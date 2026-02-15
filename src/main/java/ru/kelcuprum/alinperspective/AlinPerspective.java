@@ -3,6 +3,7 @@ package ru.kelcuprum.alinperspective;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
@@ -11,29 +12,29 @@ import ru.kelcuprum.alinlib.config.Config;
 
 public class AlinPerspective implements ClientModInitializer {
     public static Config config = new Config("./config/alinperspective.json");
-    public static KeyMapping toogleMode;
+    public static KeyMapping toggleMode;
     public static KeyMapping rotatePlayer;
-
+    public static KeyMapping.Category keybindCategory = KeyMapping.Category.register(Identifier.parse("alinperspective"));
     public static float cameraPitch = 0;
     public static float cameraYaw = 0;
 
     @Override
     public void onInitializeClient() {
-        toogleMode = KeyMappingHelper.register(new KeyMapping(
+        toggleMode = KeyMappingHelper.register(new KeyMapping(
                 "alinperspective.toggle",
                 GLFW.GLFW_KEY_F4,
-                "alinperspective"
+                keybindCategory
         ));
 
         rotatePlayer = KeyMappingHelper.register(new KeyMapping(
                 "alinperspective.rotatePlayer",
                 GLFW.GLFW_KEY_LEFT_ALT,
-                "alinperspective"
+                keybindCategory
         ));
         ClientTickEvents.START_CLIENT_TICK.register((s) -> {
             boolean pmrEnable = config.getBoolean("ENABLE", false);
             if(AlinLib.MINECRAFT.player == null) return;
-            if(toogleMode.consumeClick()){
+            if(toggleMode.consumeClick()){
                 pmrEnable = !pmrEnable;
                 cameraPitch = AlinLib.MINECRAFT.player.getYRot();
                 cameraYaw = AlinLib.MINECRAFT.player.getXRot();

@@ -3,6 +3,7 @@ package ru.kelcuprum.alinperspective.mixin;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +22,7 @@ public class CameraMixin {
     private float xRot;
 
     @Inject(method = "setup", at= @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;move(FFF)V", ordinal = 0))
-    public void setup$move(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo info){
+    public void setup$move(Level level, Entity entity, boolean bl, boolean bl2, float f, CallbackInfo ci){
         if(AlinPerspective.config.getBoolean("ENABLE", false)){
             this.yRot = AlinPerspective.cameraPitch;
             this.xRot = AlinPerspective.cameraYaw;

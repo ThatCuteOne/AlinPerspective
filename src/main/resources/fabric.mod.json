@@ -29,6 +29,6 @@
     "fabricloader": "*",
     "fabric": "*",
     "alinlib": "*",
-    "minecraft": ">=1.21.2"
+    "minecraft": ">=1.21.11"
   }
 }
